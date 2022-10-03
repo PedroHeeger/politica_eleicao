@@ -1,17 +1,19 @@
+Esse projeto tem como objetivo fazer comparações entre a composição dos políticos eleitos em 2018, com os de 2022 que será feito futuramente.
+Iremos verificar quantos candidatos a cada cargo, quanto cada partido elegeu em cada estado, iremos calcular os quocientes eleitoral e partidário, a somatória de votos válidos total e de cada partido para os cargos que sejam de eleições proporcionais.
 
 
-A pasta __eleição_18__ contém todos os arquivos para construção do banco tanto no Cassandra como no MySQL, além dos códigos para inserção e manuseio dos dados.
+A pasta __eleição_18__ contém todos os arquivos para construção do banco tanto no Cassandra como no MySQL, além dos códigos para inserção e manipulação dos dados.
 
 ### Pasta __cql__
-Essa é a primeira pasta a ser utilizada que irá construir o banco Cassandra e apenas uma tabela geral, esse será nosso Data Lake. Então iremos pegar os dados no arquivo excel dentro da pasta __dataset__, __csv__, transformará em arquivo parquet que será salvo dentro dessa mesma pasta em __parquet__. Com os dados mais leve em parquet, será extraído esses dados e inseridos na tabela criada no Cassandra.
+Essa é a primeira pasta a ser utilizada que irá construir o banco Cassandra e apenas uma tabela geral, esse será nosso Data Lake. Então iremos pegar os dados no arquivo excel dentro da pasta __dataset/csv__, transformará em arquivo parquet que será salvo dentro dessa mesma pasta em __dataset/parquet__. Com os dados mais leve em parquet, será extraído esses dados e inseridos na tabela criada no Cassandra.
  
-    . create_keyspace: Cria o banco no Cassandra.
-    . main: Arquivo principal que cria a conexão com o banco criado.
-    . create_table: Cria a tabela geral para receber os dados, neste banco que foi criado.
-    . parquet: Extrai os dados do arquivo csv e transforma em parquet.
-    . insert: Extrai os dados do arquivo parquet, trata as colunas, transformando os nomes de maíscula para minúscula, cria uma nova coluna do tipo UUID para uso do banco Cassandra, e por fim, insere na tabela criada no banco.
-    . zdelete: Deleta a tabela criada no banco.
-    . selection: Extrai os dados na tabela criada no banco Cassandra e esse Dataframe será utilizado por arquivos da pasta __cql-sql__.
+1) create_keyspace: Cria o banco no Cassandra.
+2) main: Arquivo principal que cria a conexão com o banco criado.
+3) create_table: Cria a tabela geral para receber os dados no banco criado.
+4) parquet: Extrai os dados do arquivo csv e transforma em parquet.
+5) insert: Extrai os dados do arquivo parquet, trata as colunas, transformando os nomes de maíscula para minúscula, cria uma nova coluna do tipo UUID para uso do banco Cassandra, e por fim, insere na tabela criada no banco.
+6) zdelete: Deleta a tabela criada no banco.
+7) selection: Extrai os dados na tabela criada no banco Cassandra e esse Dataframe será utilizado por arquivos da pasta __cql-sql__.
 
 ### Pasta __cql-sql__
 Essa pasta é a segunda a ser utilizada que irá utilizar os dados no Dataframe criado no arquivo __selection__ da pasta __cql__. A partir desse Dataframe será selecionado as colunas para cada tabela, dividido a tabela original do Cassandra em várias tabelas menores (auxiliares) e a tabela principal (candidato). Essas tabelas utilizarão o conceito de chaves primárias e estrangeiras para que seja possível conectar as informações entre eleas.
