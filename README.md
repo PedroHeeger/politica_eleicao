@@ -1,5 +1,7 @@
 # PROJETO PESSOAL POLITICA_ELEICAO
 
+
+## ORGANIZAÇÃO:
 Esse projeto tem como objetivo fazer comparações entre a composição dos políticos eleitos em 2018, com os de 2022 que será feito futuramente (Aguardar o termíno das eleiçõs, apuração e disponibilização da base de dados pelo TSE).
 Iremos verificar quantos candidatos a cada cargo, quanto cada partido elegeu em cada estado, iremos calcular os quocientes eleitoral e partidário, a somatória de votos válidos total e de cada partido para os cargos que sejam de eleições proporcionais.
 
@@ -46,26 +48,33 @@ Essa pasta é a segunda a ser utilizada onde além de criar o banco, as tabelas 
 8) export-"nome_tabela": São dois arquivos que irão exportar nossos resultados finais para uma tabela de excel.
 
 
+## DESENVOLVIMENTO:
+Esse projeto foi construído a partir de containers Docker através de arquivos dockerfile (pyspark) e YAML (docker-compose). Foram desenvolvidos quatro containers, um para o PySpark onde executamos todos os scripts, um para o banco Cassandra, outro para o banco MySQL e o último para o PHPMyAdmin.
 
-
+Os scripts foram desenvolvidos na linguagem Python (Pyspark), foram utilizados bibliotecas como Pandas, SQLAlchemy e PySpark.
 
 
 ## LINKS DE CONSULTA
 
-    . Como funciona o sistema proporcional?: https://www.tse.jus.br/o-tse/escola-judiciaria-eleitoral/publicacoes/revistas-da-eje/artigos/revista-eletronica-eje-n.-5-ano-3/como-funciona-o-sistema-proporcional
+Como funciona o sistema proporcional?:
+https://www.tse.jus.br/o-tse/escola-judiciaria-eleitoral/publicacoes/revistas-da-eje/artigos/revista-eletronica-eje-n.-5-ano-3/como-funciona-o-sistema-proporcional
 
-    . RESULTADO ELEIÇÃO 2018: placar.eleicoes.uol.com.br/2018/1turno/rs/apuracao-no-estado/
+RESULTADO ELEIÇÃO 2018: 
+https://placar.eleicoes.uol.com.br/2018/1turno/rs/apuracao-no-estado/
 
-    . NÚMERO DE DEPUTADOS POR ESTADO: www2.camara.leg.br/a-camara/conheca/numero-de-deputados-por-estado
+NÚMERO DE DEPUTADOS POR ESTADO: 
+https://www2.camara.leg.br/a-camara/conheca/numero-de-deputados-por-estado
 
-    . NÚMERO DE DEPUTADOS ESTADUAIS POR ESTADO: https://noticias.uol.com.br/politica/eleicoes/2018/raio-x/assembleias/numero-de-deputados-estaduais-eleitos-por-partido/?uf=sp
+NÚMERO DE DEPUTADOS ESTADUAIS POR ESTADO: 
+https://noticias.uol.com.br/politica/eleicoes/2018/raio-x/assembleias/numero-de-deputados-estaduais-eleitos-por-partido/?uf=sp
 
-    . COMPOSICAO CAMARA 2018: camara.leg.br/internet/infdoc/novoconteudo/Acervo/CELEG/Carometro/carometro_legislatura56.pdf
+SUPLENTES EM EXERCÍCIO: 
+https://camara.leg.br/deputados/suplentes-em-exercicio
 
-    . SUPLENTES EM EXERCÍCIO: camara.leg.br/deputados/suplentes-em-exercicio
+COMPOSICAO GOVERNO 2018: 
+https://pt.wikipedia.org/wiki/Lista_de_governadores_das_unidades_federativas_do_Brasil_(2019–2023)
 
-    . COMPOSICAO GOVERNO 2018: pt.wikipedia.org/wiki/Lista_de_governadores_das_unidades_federativas_do_Brasil_(2019–2023)
+LISTA COM TODOS PARTIDOS ANTIGOS: 
+https://www.tse.jus.br/eleitor/glossario/termos/partido-politico
 
-    . LISTA COM TODOS PARTIDOS ANTIGOS: https://www.tse.jus.br/eleitor/glossario/termos/partido-politico
-
-    . LISTA COM OS PARTIDOS ATUAIS: pt.wikipedia.org/wiki/Lista_de_partidos_políticos_do_Brasil#:~:text=Desde%20fevereiro%20de%202022%2C%20o,Tribunal%20Superior%20Eleitoral%20(TSE).
+LISTA COM OS PARTIDOS ATUAIS: https://pt.wikipedia.org/wiki/Lista_de_partidos_políticos_do_Brasil#:~:text=Desde%20fevereiro%20de%202022%2C%20o,Tribunal%20Superior%20Eleitoral%20(TSE).
