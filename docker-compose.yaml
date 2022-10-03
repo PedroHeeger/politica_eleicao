@@ -1,0 +1,90 @@
+version: '3'
+
+services: 
+  pyspark-app:
+    build:
+      context: .
+      dockerfile: pyspark.dockerfile
+      # args:
+      #   MYARGUMENTO: "argumento"
+    container_name: pyspark-app
+    # environment:
+    #   - MYVARIABLE="VARIÁVEL"
+    depends_on:
+      mysql-app:
+        condition: service_started
+    networks:
+      - mysql_network
+      - cassandra_network
+    restart: always
+    volumes:
+      - type: bind
+        source: /home/pedro/study/modelos/etl/politica_eleicao
+        target: /home/pyspark/app
+        bind:
+         create_host_path: true
+  
+  mysql-app:
+    # env_file:
+    #   - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    image: mysql:8.0.30
+    networks:
+      - mysql_network
+    ports:
+      - mode: ingress
+        target: 3306
+        published: "3306"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /home/pedro/study/modelos/etl/politica_eleicao/dbdata_mysql
+        target: /var/lib/mysql
+        bind:
+          create_host_path: true
+
+  phpmyadmin-app:
+    environment:
+      - PMA_ARBITRARY=1
+    image: phpmyadmin:apache
+    links:
+      - mysql-app
+    networks:
+      - mysql_network
+    ports:
+      - mode: ingress
+        target: 80
+        published: 80
+        protocol: tcp
+    restart: always
+
+  cassandra-app:
+    image: cassandra:4.0.6
+    networks:
+      - mysql_network
+    ports:
+      - mode: ingress
+        target: 9042
+        published: 9042
+        protocol: tcp
+    volumes:
+      # - type: bind
+      #   source: /home/pedro2/study/modelos/etl/politica_eleicao/dataset
+      #   target: /home/cassandra/dataset
+      #   bind:
+      #     create_host_path: true
+      - type: bind
+        source: /home/pedro/study/modelos/etl/politica_eleicao/dbdata_cassandra
+        target: /var/lib/cassandra
+        bind:
+          create_host_path: true
+
+
+networks:
+  mysql_network:
+    name: mysql_network
+  cassandra_network:
+    name: cassandra_network
