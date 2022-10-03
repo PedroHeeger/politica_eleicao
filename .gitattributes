@@ -1,0 +1,8 @@
+eleicao_18/dataset filter=lfs diff=lfs merge=lfs -text
+eleicao_18/dataset/csv/votacao_candidato_munzona_2018_RJ.csv filter=lfs diff=lfs merge=lfs -text
+eleicao_18/dataset/csv/votacao_candidato_munzona_2018_RS.csv filter=lfs diff=lfs merge=lfs -text
+eleicao_18/dataset/csv/votacao_candidato_munzona_2018_BA.csv filter=lfs diff=lfs merge=lfs -text
+eleicao_18/dataset/csv/votacao_candidato_munzona_2018_MG.csv filter=lfs diff=lfs merge=lfs -text
+eleicao_18/dataset/csv/votacao_candidato_munzona_2018_GO.csv filter=lfs diff=lfs merge=lfs -text
+eleicao_18/dataset/csv/votacao_candidato_munzona_2018_PR.csv filter=lfs diff=lfs merge=lfs -text
+eleicao_18/dataset/csv/votacao_candidato_munzona_2018_SP.csv filter=lfs diff=lfs merge=lfs -text
