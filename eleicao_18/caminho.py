@@ -1,1 +1,0 @@
-end = '/home/pyspark/app/eleicao_18/'
