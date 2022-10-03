@@ -10,7 +10,8 @@ Esse projeto é dividido em:
 - eleicao_22: Toda a construção dos bancos para eleição de 2022.
 - geral (EM CONSTRUÇÃO): Essa pasta será para construção de um outro banco no MySQL que vai receber dos bancos das eleições 18 e 22, apenas os candidatos eleitos, assim montaremos a composição dos políticos eleitos nos cargos com a inserção de duas colunas de data para monitorar a saída e entrada de políticos aos cargos durante o mandato. Sendo possível adicionar os suplentes que entraram/entrarão ao longo dos mandatos.
 
-A pasta __eleição_18__ contém todos os arquivos para construção do banco tanto no Cassandra como no MySQL, além dos códigos para inserção e manipulação dos dados. É dividida em:
+### Pasta eleicao_18
+A pasta __eleicao_18__ contém todos os arquivos para construção do banco tanto no Cassandra como no MySQL, além dos códigos para inserção e manipulação dos dados. É dividida em:
 - Pasta conector: Contém os arquivos JAR que serão utilizado para fazer as conexões na configuração da sessão do Spark.
 - Pasta cql
 - Pasta cql-sql
@@ -18,7 +19,7 @@ A pasta __eleição_18__ contém todos os arquivos para construção do banco ta
 - con_spark: Arquivo de configuração da sessão do Spark para ser usado nos demais arquivos. Essa configuração contém arquivos JAR (conectores) que permitem a conexão com o banco Cassandra e MySQL e também com o formato de arquivo em Excel.
 - con_sqlalch: Arquivo de configuração da conexão do SQL Alchemy com o banco MySQL
 
-### Pasta __cql__
+#### Pasta __cql__
 Essa é a primeira pasta a ser utilizada que irá construir o banco Cassandra e apenas uma tabela geral, esse será nosso Data Lake. Então iremos pegar os dados no arquivo excel dentro da pasta __dataset/csv__, transformará em arquivo parquet que será salvo dentro dessa mesma pasta em __dataset/parquet__. Com os dados mais leve em parquet, será extraído esses dados e inseridos na tabela criada no Cassandra.
  
 1) create_keyspace: Cria o banco no Cassandra.
@@ -29,13 +30,13 @@ Essa é a primeira pasta a ser utilizada que irá construir o banco Cassandra e 
 6) zdelete: Deleta a tabela criada no banco.
 7) selection: Extrai os dados na tabela criada no banco Cassandra e esse Dataframe será utilizado por arquivos da pasta __cql-sql__.
 
-### Pasta __cql-sql__
+#### Pasta __cql-sql__
 Essa pasta é a terceira a ser utilizada que irá utilizar os dados do Dataframe criado no arquivo __selection__ da pasta __cql__. A partir desse Dataframe será selecionado as colunas para cada tabela, dividido a tabela original do Cassandra em várias tabelas menores (auxiliares) e a tabela principal (candidato). Essas tabelas utilizarão o conceito de chaves primárias e estrangeiras para que seja possível conectar as informações entre eleas.
 
 Essa pasta é referente ao processo de ETL que será realizado. Extração dos dados da tabela do banco Cassandra, manipulação dos dados para construção de tabelas separadas e utilização do conceito de chaves e inserção no banco MySQL. Todos os inserts podem ser feitos em dois modelos, inserção em Spark via JDBC (Recomendado), e inserção em Pandas via SQLAlchemy. As colunas serão selecionadas conforme seja a tabela a ser criada.
 
 
-### Pasta __sql__
+#### Pasta __sql__
 Essa pasta é a segunda a ser utilizada onde além de criar o banco, as tabelas e as views no banco MySQL, vai extrair os dados da tabela principal candidato, somar o numéro de votos de cada candidato e inserir em duas novas tabelas que serão criadas para informar os resultados acumulados por estado e município.
 
 1) create_db: Cria o banco de dados no MySQL.
