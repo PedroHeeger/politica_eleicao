@@ -1,0 +1,3 @@
+SELECT * FROM `view_cand_total` WHERE `sg_uf`= "RS" and `ds_cargo`="Deputado Federal" ORDER BY 	`qt_votos_nominais` DESC;
+
+SELECT * FROM `quociente` WHERE cd_cargo = 6 and sg_uf="RS" order by sum_partido_vv desc;
